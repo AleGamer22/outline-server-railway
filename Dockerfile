@@ -1,9 +1,16 @@
-FROM debian:bullseye-slim
+# Usa una imagen base de Debian o Ubuntu
+FROM ubuntu:20.04
 
-# Instalar dependencias y ejecutar el script de instalación de Outline
+# Instala las dependencias necesarias
 RUN apt-get update && apt-get install -y \
-    curl sudo && \
-    curl -sSL https://raw.githubusercontent.com/Jigsaw-Code/outline-apps/master/server_manager/install_scripts/install_server.sh | bash
+    curl sudo
 
-# Iniciar bash como comando principal
+# Ejecuta el script de instalación de Outline
+RUN curl -sSL https://raw.githubusercontent.com/Jigsaw-Code/outline-apps/master/server_manager/install_scripts/install_server.sh | bash
+
+# Exponer el puerto necesario
+EXPOSE 443
+
+# Comando por defecto
 CMD ["bash"]
+
